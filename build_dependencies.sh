@@ -1,7 +1,7 @@
 #!/bin/bash
 
 RESTSDK_VERSION="v2.10.14"
-DEFAULT_LIB_DIRECTORY_PATH="./lib"
+DEFAULT_LIB_DIRECTORY_PATH="./libs"
 
 libDir=${1:-$DEFAULT_LIB_DIRECTORY_PATH}
 
@@ -16,7 +16,7 @@ install_cpprestsdk(){
     echo "Downloading C++ REST SDK $RESTSDK_VERSION..."
 	git clone https://github.com/Microsoft/cpprestsdk.git "$restsdkDir"
 	(cd $restsdkDir && git checkout tags/$RESTSDK_VERSION -b $RESTSDK_VERSION)
-	mkdir "$restsdkBuildDir"
+	mkdir -p "$restsdkBuildDir"
 	if [[ "$OSTYPE" == "linux-gnu" ]]; then
 		export CXX=g++-4.9
 	fi
