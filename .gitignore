@@ -2,3 +2,5 @@
 /.vscode
 /.devcontainer
 .env
+/libs
+/includes
