@@ -4,11 +4,22 @@ LABEL project-name=cpprest-api \
       year=2019 \
       description="C++ REST API by Yuzu Project" \
       maintainer=renato@yuzu-project.com
+ENV PS1="\033[1;36m$PWD\$\033[0m "
 
+# Prepare general container environment
 RUN apk add openssh bash && \
     adduser -D developer && \
     echo -e "Senha123\nSenha123" | passwd developer
 
-COPY . /app
+# Copy required scripts to build the application
+COPY ./CMakeLists.txt /app/CMakeLists.txt
+COPY ./build_dependencies.sh /app/build_dependencies.sh
 
-CMD [ "/bin/bash" ]
+# Build necessary dependencies
+WORKDIR /app
+RUN ./build_dependencies.sh
+
+# Install our application files
+COPY ./src /app/src
+
+ENTRYPOINT [ "/bin/bash" ]
