@@ -4,7 +4,7 @@ LABEL project-name=cpprest-api \
       year=2019 \
       description="C++ REST API by Yuzu Project" \
       maintainer=renato@yuzu-project.com
-ENV PS1="\033[1;36m$PWD\$\033[0m "
+ENV PS1="\033[1;36m\$PWD\$\033[0m "
 
 # Prepare general container environment
 RUN apk add openssh bash && \
