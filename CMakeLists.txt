@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
+set(CMAKE_CXX_STANDARD 11)
 
 project(cpprest-basic-sample)
 
@@ -24,26 +25,28 @@ endif()
 
 # Project construction ...
 
-# source files ...
-add_executable(${PROJECT_NAME} ./src/main.cpp)
-
-
 # headers search paths ...
 set(CPPRESTSDK_INCLUDE_DIR "./libs/cpprestsdk/Release/include")
 set(PROJECT_INCLUDE_DIR "./src/include")
 message(PROJECT " ${PROJECT_INCLUDE_DIR}")
 set(HEADER_SEARCH_PATHS ${CPPRESTSDK_INCLUDE_DIR} ${PROJECT_INCLUDE_DIR} ${Boost_INCLUDE_DIR} ${OPENSSL_INCLUDE_DIR})
 
-# library search paths ...
-set(OPENSSL_LIBS "${OPENSSL_LIBRARIES}")
-set(CPPRESTSDK_LIBRARY "${PROJECT_SOURCE_DIR}/libs/cpprestsdk/build.release/Binaries/libcpprest.a")
-set(LIBRARIES_SEARCH_PATHS ${CPPRESTSDK_LIBRARY} ${OPENSSL_LIBS} ${Boost_LIBRARIES})
+# Define variables which will point to binaries of libraries that we built ourselves
+set(CPPRESTSDK_LIBRARY "${PROJECT_SOURCE_DIR}/libs/cpprestsdk/Binaries/libcpprest.a")
+
+# We will use this single variable to point dependencies for our executable
+set(LIBRARIES_SEARCH_PATHS 
+    ${CPPRESTSDK_LIBRARY}
+    ${OPENSSL_LIBRARIES}
+    ${Boost_LIBRARIES}
+)
 
 message(BOOST_LIBS " ${Boost_LIBRARIES}")
 message(OPENSSL_LIBS " ${OPENSSL_LIBRARIES}")
 message(CPPRESTSDK_LIBRARY " ${CPPRESTSDK_LIBRARY}")
 message(LIBRARIES_SEARCH_PATHS " ${LIBRARIES_SEARCH_PATHS}")
 
+# Set project depedencies
 include_directories(${HEADER_SEARCH_PATHS})
 if (APPLE)
     target_link_libraries(${PROJECT_NAME} "-framework CoreFoundation")
@@ -53,3 +56,9 @@ if (APPLE)
 else()
     target_link_libraries(${PROJECT_NAME} ${LIBRARIES_SEARCH_PATHS})
 endif()
+
+
+# Add source files required to build our binary...
+add_executable(${PROJECT_NAME} 
+    ./src/main.cpp
+)
