@@ -20,16 +20,18 @@ print_help(){
 }
 
 install_cpprestsdk(){
+	binaryFilename="libcpprest.a"
 	restsdkDir="${libDir}/cpprestsdk"
+	restsdkBinaryOutputDir="${libDir}/cpprestsdk/Binaries"
 	restsdkBuildDir="${restsdkDir}/build.release"
 	restsdkBuildType="Release"
-	restsdkBuildTestsToggle="OFF"
+	restsdkBuildTestsToggle="ON"
 	if [ "${isDebug}" = "1" ]; then
 		restsdkBuildDir="${restsdkDir}/build.debug"
 		restsdkBuildType="Debug"
-		if [ "${skipTests}" = "0" ]; then
-			restsdkBuildTestsToggle="ON"
-		fi
+	fi
+	if [ "${skipTests}" = "1" ]; then
+		restsdkBuildTestsToggle="OFF"
 	fi
 	restsdkOutputDir="${restsdkBuildDir}/Release/Binaries"
    
@@ -45,10 +47,10 @@ install_cpprestsdk(){
 		export CXX=g++-4.9
 	fi
     echo -e "${COLOR_LIGHTCYAN}Building C++ REST SDK ${RESTSDK_VERSION}...${COLOR_NONE}"
-    echo -e "${COLOR_YELLOW}-  Build type : ${restsdkBuildType}${COLOR_NONE}"
-    echo -e "${COLOR_YELLOW}-  Build tests? ${restsdkBuildTestsToggle}${COLOR_NONE}"
+    echo -e "${COLOR_YELLOW}-  Build type: ${restsdkBuildType}${COLOR_NONE}"
+    echo -e "${COLOR_YELLOW}-  Skip tests? ${restsdkBuildTestsToggle}${COLOR_NONE}"
 	(cd "${restsdkBuildDir}" && cmake -G Ninja .. -DCMAKE_BUILD_TYPE=${restsdkBuildType} -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTS=${restsdkBuildTestsToggle} -DBUILD_SAMPLES=OFF && ninja)
-	#(cd "${restsdkBuildDir}" && make)
+	(mkdir -p "${restsdkBinaryOutputDir}" && cp "${restsdkOutputDir}/${binaryFilename}" "${restsdkBinaryOutputDir}/${binaryFilename}" )
 	if [ "${skipTests}" = "0" ]; then
 	    echo -e "${COLOR_YELLOW}>>  Running tests for C++ REST SDK...${COLOR_NONE}"		
 		(cd "${restsdkOutputDir}" && ./test_runner *_test.so)
