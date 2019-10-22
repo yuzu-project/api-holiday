@@ -22,4 +22,9 @@ RUN ./build_dependencies.sh
 # Install our application files
 COPY ./src /app/src
 
+# Create build support files
+RUN mkdir -p ./build/default && \
+    cd build/default && \
+    cmake -G Ninja ../..
+
 ENTRYPOINT [ "/bin/bash" ]
