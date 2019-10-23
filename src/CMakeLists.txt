@@ -24,15 +24,17 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
 endif()
 
 # Project construction ...
+add_executable(${PROJECT_NAME})
 
 # headers search paths ...
-set(CPPRESTSDK_INCLUDE_DIR "./libs/cpprestsdk/Release/include")
-set(PROJECT_INCLUDE_DIR "./src/include")
-message(PROJECT " ${PROJECT_INCLUDE_DIR}")
+set(PROJECT_BASE_DIR "${PROJECT_SOURCE_DIR}/..")
+set(CPPRESTSDK_INCLUDE_DIR "${PROJECT_BASE_DIR}/libs/cpprestsdk/Release/include")
+set(PROJECT_INCLUDE_DIR "./include")
+message(PROJECT_INCLUDE_DIR " ${PROJECT_INCLUDE_DIR}")
 set(HEADER_SEARCH_PATHS ${CPPRESTSDK_INCLUDE_DIR} ${PROJECT_INCLUDE_DIR} ${Boost_INCLUDE_DIR} ${OPENSSL_INCLUDE_DIR})
 
 # Define variables which will point to binaries of libraries that we built ourselves
-set(CPPRESTSDK_LIBRARY "${PROJECT_SOURCE_DIR}/libs/cpprestsdk/Binaries/libcpprest.a")
+set(CPPRESTSDK_LIBRARY "${PROJECT_BASE_DIR}/libs/cpprestsdk/Binaries/libcpprest.a")
 
 # We will use this single variable to point dependencies for our executable
 set(LIBRARIES_SEARCH_PATHS 
@@ -59,6 +61,7 @@ endif()
 
 
 # Add source files required to build our binary...
-add_executable(${PROJECT_NAME} 
-    ./src/main.cpp
+target_sources(${PROJECT_NAME} 
+    PRIVATE
+        main.cpp
 )
