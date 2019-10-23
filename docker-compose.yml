@@ -3,3 +3,7 @@ services:
   yuzup-cpprest-api:
     build: .
     env_file: .env
+    entrypoint: /app/scripts/build_and_start.sh
+    volumes:
+      - ./src:/app/src
+      - ./scripts:/app/scripts

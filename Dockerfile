@@ -12,19 +12,18 @@ RUN apk add openssh bash && \
     echo -e "Senha123\nSenha123" | passwd developer
 
 # Copy required scripts to build the application
-COPY ./CMakeLists.txt /app/CMakeLists.txt
 COPY ./build_dependencies.sh /app/build_dependencies.sh
 
-# Build necessary dependencies
+# Setup app directory and build necessary dependencies
 WORKDIR /app
-RUN ./build_dependencies.sh
+RUN mkdir -p ./build/default && \
+    chmod +x ./build_dependencies.sh && \
+    ./build_dependencies.sh
 
 # Install our application files
 COPY ./src /app/src
+COPY ./scripts /app/scripts
 
-# Create build support files
-RUN mkdir -p ./build/default && \
-    cd build/default && \
-    cmake -G Ninja ../..
+# Prepare scripts
+RUN chmod +x ./scripts/*
 
-ENTRYPOINT [ "/bin/bash" ]
