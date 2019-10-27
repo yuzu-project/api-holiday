@@ -1,0 +1,28 @@
+{
+  "name": "api-holiday",
+  "version": "1.0.0",
+  "description": "A simple API for holiday information",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "chmod +x ./init_repo.sh && ./init_repo.sh",
+    "lint": "./scripts/pre-commit.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuzu-project/api-holiday.git"
+  },
+  "keywords": [
+    "api",
+    "rest",
+    "cpp",
+    "holiday",
+    "calendar",
+    "date"
+  ],
+  "author": "Renato Yamassaki",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yuzu-project/api-holiday/issues"
+  },
+  "homepage": "https://github.com/yuzu-project/api-holiday#readme"
+}
