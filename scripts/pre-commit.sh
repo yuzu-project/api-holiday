@@ -23,7 +23,7 @@ changedSourceFiles=$(git diff-index --cached ${commitedHead} | \
 
 if [ -n "${changedSourceFiles}" ]; then
   echo "${COLOR_YELLOW}Start static analysis in changed source files...${COLOR_NONE}"
-	cppcheck --error-exitcode=1 ${changedSourceFiles}
+	cppcheck --error-exitcode=1 --std=c++14 --includes-file=./src/include ${changedSourceFiles}
   exitStatus=$?
   if [ "${exitStatus}" = "0" ]; then
     echo "${COLOR_GREEN}Ok, all green! :)${COLOR_NONE}"
