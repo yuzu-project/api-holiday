@@ -4,15 +4,7 @@
         "CppRestSdkBaseFolder": "${DefaultLibraryPath}/cpprestsdk",
         "DefaultIncludePath": [
             "${workspaceFolder}/src/include",
-            "${CppRestSdkBaseFolder}/Release/include",
-            "/usr/include/c++/8",
-            "/usr/include/x86_64-linux-gnu/c++/8",
-            "/usr/include/c++/8/backward",
-            "/usr/lib/gcc/x86_64-linux-gnu/8/include",
-            "/usr/local/include",
-            "/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed",
-            "/usr/include/x86_64-linux-gnu",
-            "/usr/include"
+            "${CppRestSdkBaseFolder}/Release/include"
         ],
         "CommonDefines": []
     },
@@ -35,7 +27,7 @@
                 "${default}"
             ],
             "intelliSenseMode": "${default}",
-            "compilerPath": "${default}",
+            "compilerPath": "/usr/bin/gcc",
             "cStandard": "c11",
             "cppStandard": "c++17",
             "browse": {
