@@ -42,10 +42,7 @@ install_cpprestsdk(){
     echo -e "${COLOR_LIGHTCYAN}Downloading C++ REST SDK ${RESTSDK_VERSION}...${COLOR_NONE}"
 	git clone https://github.com/Microsoft/cpprestsdk.git "${restsdkDir}"
 	(cd ${restsdkDir} && git checkout tags/${RESTSDK_VERSION} -b ${RESTSDK_VERSION})
-	mkdir -p "${restsdkBuildDir}"
-	if [ "${OSTYPE}" = "linux-gnu" ]; then
-		export CXX=g++-4.9
-	fi
+	(mkdir -p "${restsdkBuildDir}" && 	mkdir -p "${restsdkOutputDir}")
     echo -e "${COLOR_LIGHTCYAN}Building C++ REST SDK ${RESTSDK_VERSION}...${COLOR_NONE}"
     echo -e "${COLOR_YELLOW}-  Build type: ${restsdkBuildType}${COLOR_NONE}"
     echo -e "${COLOR_YELLOW}-  Skip tests? ${restsdkBuildTestsToggle}${COLOR_NONE}"
