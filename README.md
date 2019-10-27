@@ -7,18 +7,41 @@ https://github.com/ivanmejiarocha/micro-service
 
 Currently, this project only builds on Unix-like OSes. Besides that yout must have installed in your system:
 - Docker (ensure that docker-compose is also installed)
+- cppchecker
+- npm
 - Internet connection (you need to download Docker base image)
 
-## Building it
+## Local repository set-up
 
-1. Clone this repository by either downloading it as a zip file or more simply:
+Here's how you set-up your local repository:
+
+1. Clone this repository into your local workspace:
 
 ```
 $ git clone git@github.com:yuzu-project/api-holiday.git
 $ cd api-holiday
 ```
 
-2. Create an environment variable descriptor file by duplicating the supplied example file:
+2. If you intend to edit this code, you might need to build the C++ REST SDK locally,
+so the following must also be installed in the development machine:
+- Boost dev libraries 
+- OpenSSL dev libraries
+- zlib dev libraries
+
+which can be accomplished by running (on Debian-like systems):
+```
+$ sudo apt-get install sudo apt install libboost-all-dev openssl libzopfli-dev libssl-dev zlib1g-dev
+```
+
+3. Run npm script to set-up local development environment. Say 'y' when asked to build dependencies (if you intend to edit this code):
+```
+$ npm install
+```
+
+## Building it
+
+
+1. Create an environment variable descriptor file by duplicating the supplied example file:
 
 ```
 $ cp .env.example .env
