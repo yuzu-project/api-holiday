@@ -33,10 +33,12 @@ which can be accomplished by running (on Debian-like systems):
 $ sudo apt-get install sudo apt install libboost-all-dev openssl libzopfli-dev libssl-dev zlib1g-dev
 ```
 
-3. Run npm script to set-up local development environment. Say 'y' when asked to build dependencies (if you intend to edit this code):
+3. Run npm script to set-up local development environment:
 ```
 $ npm install
 ```
+If you intend to edit this code, say 'y' (without quotes) when asked to build dependencies.
+Otherwise, skip it by answering 'n'.
 
 ## Building it
 
