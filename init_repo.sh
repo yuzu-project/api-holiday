@@ -8,7 +8,7 @@ COLOR_LIGHTCYAN="\033[1;36m"
 echo "${COLOR_YELLOW}Part 1 of 3 -- set-up scripts correct permission${COLOR_NONE}"
 
 echo -n "${COLOR_LIGHTCYAN}-- Setting up correct file permission on scripts... ${COLOR_NONE}"
-(chmod +x ./build_dependencies.sh && chmod +x ./scripts/*.sh) 2> /dev/null
+(chmod +x ./build_dependencies.sh && chmod +x ./run-clang.format.py && chmod +x ./scripts/*.sh) 2> /dev/null
 if [ "$?" -ne "0" ]; then
   echo "${COLOR_RED}failed${COLOR_NONE}"
   echo "${COLOR_RED}ERROR: failed setting permission on scripts! Not enough privileges?${COLOR_NONE}"

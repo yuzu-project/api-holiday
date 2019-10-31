@@ -22,11 +22,21 @@ changedSourceFiles=$(git diff-index --cached ${commitedHead} | \
 	grep -E '[MA]	.*\.(c|cpp|cc|cxx)$' | cut -f 2)
 
 if [ -n "${changedSourceFiles}" ]; then
-  echo "${COLOR_YELLOW}Start static analysis in changed source files...${COLOR_NONE}"
+  echo "${COLOR_YELLOW}Running static analysis in changed source files...${COLOR_NONE}"
 	cppcheck --error-exitcode=1 --std=c++14 --includes-file=./src/include ${changedSourceFiles}
   exitStatus=$?
   if [ "${exitStatus}" = "0" ]; then
-    echo "${COLOR_GREEN}Ok, all green! :)${COLOR_NONE}"
+    echo "${COLOR_GREEN}Static analysis passed! :)${COLOR_NONE}"
+  else
+    echo "${COLOR_RED}Pre-commit failed: please check for errors in your source code as pointed above.${COLOR_NONE}"
+    exit ${exitStatus}
+  fi
+
+  echo "${COLOR_YELLOW}Running line (code style) in changed source files...${COLOR_NONE}"
+	./run-clang-format.py
+  exitStatus=$?
+  if [ "${exitStatus}" = "0" ]; then
+    echo "${COLOR_GREEN}Lint passed, all green! ^o^${COLOR_NONE}"
   else
     echo "${COLOR_RED}Pre-commit failed: please check for errors in your source code as pointed above.${COLOR_NONE}"
   fi

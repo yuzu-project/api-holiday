@@ -5,7 +5,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "install": "chmod +x ./init_repo.sh && ./init_repo.sh",
-    "lint": "./scripts/pre-commit.sh"
+    "pre-commit": "./scripts/pre-commit.sh",
+    "static-analysis": "cppcheck --error-exitcode=1 --std=c++14 --includes-file=./src/include ./src/",
+    "lint": "./run-clang-format.py -r src"
   },
   "repository": {
     "type": "git",
