@@ -8,6 +8,7 @@ https://github.com/ivanmejiarocha/micro-service
 Currently, this project only builds on Unix-like OSes. Besides that yout must have installed in your system:
 - Docker (ensure that docker-compose is also installed)
 - cppchecker
+- clang-format
 - npm
 - Internet connection (you need to download Docker base image)
 
@@ -15,14 +16,35 @@ Currently, this project only builds on Unix-like OSes. Besides that yout must ha
 
 Here's how you set-up your local repository:
 
-1. Clone this repository into your local workspace:
-
+1. Install the above requirements. On Debian-like systems, you can run:
 ```
-$ git clone git@github.com:yuzu-project/api-holiday.git
-$ cd api-holiday
+$ sudo apt install docker.io cppchecker clang-format npm
 ```
 
-2. If you intend to edit this code, you might need to build the C++ REST SDK locally,
+2. Check that the above requirements was installed successfully by checking 
+their versions. You'll get an output similar to:
+```
+$ docker -v
+Docker version 19.03.3, build a872fc2f86
+$ cppcheck --version
+Cppcheck 1.86
+$ clang-format --version
+clang-format version 8.0.0-3 (tags/RELEASE_800/final)
+$ npm -v
+6.9.0
+```
+
+3. Check that Docker service is running by issuing the following command:
+```
+$ sudo docker ps
+```
+If a connection error occurs, you might need to start and enable Docker service:
+```
+$ sudo systemctl start docker
+$ sudo systemctl enable docker
+```
+
+4. If you intend to edit this code, you might need to build the C++ REST SDK locally,
 so the following must also be installed in the development machine:
 - Boost dev libraries 
 - OpenSSL dev libraries
@@ -33,15 +55,23 @@ which can be accomplished by running (on Debian-like systems):
 $ sudo apt-get install sudo apt install libboost-all-dev openssl libzopfli-dev libssl-dev zlib1g-dev
 ```
 
-3. Run npm script to set-up local development environment:
+5. Clone this repository into your local workspace:
+
+```
+$ git clone git@github.com:yuzu-project/api-holiday.git
+$ cd api-holiday
+```
+
+6. Run npm script to set-up local development environment:
 ```
 $ npm install
 ```
 If you intend to edit this code, say 'y' (without quotes) when asked to build dependencies.
 Otherwise, skip it by answering 'n'.
 
-## Building it
 
+
+## Building it
 
 1. Create an environment variable descriptor file by duplicating the supplied example file:
 
@@ -65,3 +95,10 @@ If you don't want hassle with logs and like the idea to have your terminal clean
 ```
 $ docker-compose up -d --build
 ```
+
+
+## Acknowledgements
+
+- Based on micro service [sample code](https://github.com/ivanmejiarocha/micro-service) provided by [ivanmejiarocha](https://github.com/ivanmejiarocha)
+
+- It uses (clang-format script for CI)[https://github.com/Sarcasm/run-clang-format] provided by [Sarcasm](https://github.com/Sarcasm).
