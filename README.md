@@ -10,6 +10,7 @@ Currently, this project only builds on Unix-like OSes. Besides that yout must ha
 - cppchecker
 - clang-format
 - npm
+- Python 2.7
 - Internet connection (you need to download Docker base image)
 
 ## Local repository set-up
@@ -20,6 +21,8 @@ Here's how you set-up your local repository:
 ```
 $ sudo apt install docker.io cppchecker clang-format npm
 ```
+**Note:** Python 2.7 is already shipped with most recent Linux distributions. If it is not present,
+please get Google's help for directions on how to install it.
 
 2. Check that the above requirements was installed successfully by checking 
 their versions. You'll get an output similar to:
@@ -96,9 +99,27 @@ If you don't want hassle with logs and like the idea to have your terminal clean
 $ docker-compose up -d --build
 ```
 
+Before you start developing, you must attach git hooks so that static analysis and style-check are done
+before every commit.
+
+```
+$ npm install
+```
+
+## Static analysis and style-checking
+
+Besides the pre-commit hook, you can call the static checker and linter at any time targeting the whole
+project. You can call each of them respectivelly by issuing the following commands in the project 
+root folder:
+
+```
+$ npm run static-analysis
+$ npm run lint
+```
+
 
 ## Acknowledgements
 
-- Based on micro service [sample code](https://github.com/ivanmejiarocha/micro-service) provided by [ivanmejiarocha](https://github.com/ivanmejiarocha)
+- Based on [micro service sample code](https://github.com/ivanmejiarocha/micro-service) provided by [ivanmejiarocha](https://github.com/ivanmejiarocha)
 
-- It uses (clang-format script for CI)[https://github.com/Sarcasm/run-clang-format] provided by [Sarcasm](https://github.com/Sarcasm).
+- It uses [clang-format script for CI](https://github.com/Sarcasm/run-clang-format) provided by [Sarcasm](https://github.com/Sarcasm).
