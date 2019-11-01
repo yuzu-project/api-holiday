@@ -5,7 +5,7 @@ https://github.com/ivanmejiarocha/micro-service
 
 ## Requirements
 
-Currently, this project only builds on Unix-like OSes. Besides that yout must have installed in your system:
+Currently, this project only builds on Unix-like OSes. Besides that you must have installed in your system:
 - Docker (ensure that docker-compose is also installed)
 - cppchecker
 - clang-format
