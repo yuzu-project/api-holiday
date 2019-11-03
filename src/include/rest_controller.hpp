@@ -4,23 +4,18 @@
 
 namespace yuzup {
 namespace calendar {
-class api_service {
+class rest_controller {
  public:
-  api_service();
-  ~api_service();
-  api_service(const api_service&) = delete;
+  rest_controller();
+  ~rest_controller();
+  rest_controller(const rest_controller&) = delete;
 
   pplx::task<void> start();
   pplx::task<void> stop();
 
  protected:
   web::http::experimental::listener::http_listener listener_;
-
-  void attach_default_verb_handlers();
-
- private:
-  class pimpl;
-  pimpl& pimpl_;
+  virtual void register_verbs() = 0;
 };
 }  // namespace calendar
 }  // namespace yuzup
