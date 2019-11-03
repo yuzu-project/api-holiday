@@ -3,6 +3,15 @@ Language: Cpp
 IndentWidth: 2
 ColumnLimit: 100
 
+# Alignment style
+AlignEscapedNewlines : Right
+AllowAllParametersOfDeclarationOnNextLine : true
+BinPackArguments : false
+BinPackParameters : false
+
 # Short declarations
-AllowShortFunctionsOnASingleLine : All
+AllowShortFunctionsOnASingleLine : Empty
 AllowShortIfStatementsOnASingleLine : true
+
+SortIncludes : true
+SortUsingDeclarations : true
