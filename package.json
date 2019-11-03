@@ -7,7 +7,8 @@
     "install": "chmod +x ./init_repo.sh && ./init_repo.sh",
     "pre-commit": "./scripts/pre-commit.sh",
     "static-analysis": "cppcheck --error-exitcode=1 --std=c++14 --includes-file=./src/include ./src/",
-    "lint": "./run-clang-format.py -r src"
+    "lint": "./run-clang-format.py -r src",
+    "reformat": "find ./src -regex '.*\\.\\(cpp\\|hpp\\|cc\\|cxx|cu\\)' -exec clang-format -style=file -i {} \\;"
   },
   "repository": {
     "type": "git",
