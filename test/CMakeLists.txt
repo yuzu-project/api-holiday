@@ -5,7 +5,7 @@ project(test-runner)
 enable_testing()
 
 # Include required libraries
-find_package(Boost)
+find_package(Boost REQUIRED COMPONENTS unit_test_framework)
 
 # Configure compiler options ...
 if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
