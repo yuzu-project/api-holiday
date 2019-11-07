@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A simple API for holiday information",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./scripts/build_tests.sh && ./scripts/run_tests.sh",
     "install": "chmod +x ./init_repo.sh && ./init_repo.sh",
     "pre-commit": "./scripts/pre-commit.sh",
     "static-analysis": "cppcheck --error-exitcode=1 --std=c++14 --includes-file=./src/include ./src/",
